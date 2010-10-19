@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="old" class="kyle.demo.dependency.DependencyOld" />
+	<bean id="new" class="kyle.demo.dependency.DependencyNew" />
+
+
+	<bean id="proxy" class="kyle.demo.dependency.DependencyProxy">
+		<constructor-arg ref="dependencyFactory" />
+	</bean>
+	
+	<bean id="dependencyFactory" class="kyle.demo.dependency.factory.UrlConfiguredBeanLookupDependencyFactory" >
+		<constructor-arg ref="old" /> <!-- Default -->
+		<constructor-arg value="http://localhost:8080/config.txt" />
+		<constructor-arg value="kyle.demo.dependency.DependencyProxy" />
+	</bean>
+
+
+	<bean id="service" class="kyle.demo.service.ServiceImpl">
+		<constructor-arg ref="proxy" />
+	</bean>
+
+</beans>
