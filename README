@@ -1,5 +1,7 @@
 Demo code for OJUG talk: "Building Cautious Software"
 
+http://www.slideshare.net/KyleDyer/building-cautious-software
+
 Here we have a web application with just one servlet.
 It calls a service class.  This service has a dependency.
 Everything is wired with Spring.
