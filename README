@@ -1,0 +1,16 @@
+Demo code for OJUG talk: "Building Cautious Software"
+
+Here we have a web application with just one servlet.
+It calls a service class.  This service has a dependency.
+Everything is wired with Spring.
+The service can call an old or new version of the dependency
+based on the value in a property config file loaded from 
+a url via http.  There is a special link in the web app that
+will refresh the app to reload the config file.  When multiple
+instances of the web app are running every node reloads the 
+config even though the user clicks the reload link on only
+one node.
+
+
+Kyle Dyer
+Oct 19, 2010
