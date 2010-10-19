@@ -8,20 +8,20 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 
-import kyle.demo.dependency.factory.UrlConfiguredBeanLookupDependencyFactory;
+import kyle.demo.dependency.factory.UrlConfiguredBeanLookupFactory;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class ResetServlet extends HttpServlet {
 
-	private UrlConfiguredBeanLookupDependencyFactory dependencyFactory;
+	private UrlConfiguredBeanLookupFactory<?> dependencyFactory;
 	
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 			
-			dependencyFactory.invalidateCache();
+			dependencyFactory.invalidateCacheAndBroadcast();
 			response.getWriter().write("Cache invalidated.");
 	}
 	
@@ -32,7 +32,7 @@ public class ResetServlet extends HttpServlet {
 		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		
 		// lookup beans
-		dependencyFactory = (UrlConfiguredBeanLookupDependencyFactory) ctx.getBean("dependencyFactory");
+		dependencyFactory = (UrlConfiguredBeanLookupFactory) ctx.getBean("dependencyFactory");
 	}
 	
 	private static final long serialVersionUID = 1L;

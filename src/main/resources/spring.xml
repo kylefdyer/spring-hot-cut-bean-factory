@@ -11,10 +11,14 @@
 		<constructor-arg ref="dependencyFactory" />
 	</bean>
 	
-	<bean id="dependencyFactory" class="kyle.demo.dependency.factory.UrlConfiguredBeanLookupDependencyFactory" >
+	<bean id="dependencyFactory" class="kyle.demo.dependency.factory.UrlConfiguredDependencyFactory" >
 		<constructor-arg ref="old" /> <!-- Default -->
 		<constructor-arg value="http://localhost:8080/config.txt" />
 		<constructor-arg value="kyle.demo.dependency.DependencyProxy" />
+	</bean>
+	
+	<bean id="jGroupBroadcaster" class="kyle.demo.jgroups.JGroupsBroadcaster">
+		<constructor-arg ref="dependencyFactory" />
 	</bean>
 
 
